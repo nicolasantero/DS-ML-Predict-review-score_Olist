@@ -41,10 +41,10 @@ filename = "finalized_model.sav"
 
 #Seleção para quais análises deseja visualizar
 select_anal = st.sidebar.radio('Menu:',
-                                        ('Nenhuma','Dashboard', 'Equipe'))
+                                        ('Home','Dashboard', 'Equipe'))
 
 # Todas análises para vereador em 2016
-if select_anal == 'Nenhuma':
+if select_anal == 'Home':
 
     st.image("Captura de tela 2022-03-13 224850.png")
     st.title("N3M Dashboard")
