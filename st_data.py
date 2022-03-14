@@ -17,7 +17,7 @@ def prep_st(data):
 def predict_nota():
     data_sample = data.sample(5).reset_index(drop=True)
     X, y = prep_st(data.sample(5))
-    st.text("Informacoes de compra dos novos consumidores")
+    st.write("Informacoes de compra dos novos consumidores")
     st.write(data_sample.drop(columns=["review_score"]))
     loaded_model = pickle.load(open(filename, 'rb'))
     st.write(X.shape)
@@ -55,12 +55,23 @@ if select_anal == 'Dashboard':
 
     if st.button('Buscar novos consumidores'):
         result = predict_nota()
-        st.text("Nota predita para os consumidores (0 : negativo, 1 : positivo) \n")
+        st.write("Nota predita para os consumidores (0 : negativo, 1 : positivo) \n")
+        l1, l2 = st.columns(2)
         if (len(result[0].unique()) == 1):
-            st.text("Apenas clientes preditos com nota positiva \n")
+            st.write("Foi encontrado apenas clientes preditos com nota positiva \n")
+            with l1:
+                st.dataframe(result)
+
         else:
-            st.text("Cliente com nota negativa encontrado \n")
-        st.dataframe(result)
+            st.write("Cliente com nota negativa encontrado \n")
+            with l1:
+                st.dataframe(result)
+            with l2:
+                st.write("Informacao de clientes com predicao de nota negativa")
+                st.dataframe(result[result[0]==0])
+
+        
+        
 
 if select_anal == 'Equipe':
     st.title("Equipe")
